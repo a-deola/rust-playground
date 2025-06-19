@@ -76,7 +76,7 @@ mod example1 {
         let balance: u64 = lottery.to_account_info().lamports();                      
             
         **lottery.to_account_info().try_borrow_mut_lamports()? -= balance;
-        **recipient.to_account_info().try_borrow_mut_lamports()? += balance; 
+        **recipient.to_account_info().try_borrow_mut_lamports()? += balance ; 
         
         Ok(())
     }

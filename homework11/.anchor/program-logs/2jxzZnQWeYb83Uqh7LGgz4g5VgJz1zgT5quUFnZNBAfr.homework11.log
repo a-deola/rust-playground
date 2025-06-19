@@ -1,0 +1,11 @@
+Streaming transaction logs mentioning 2jxzZnQWeYb83Uqh7LGgz4g5VgJz1zgT5quUFnZNBAfr. Confirmed commitment
+Transaction executed in slot 87:
+  Signature: 8kAveADiGAGT2q3mKNPsGcNKa2YwhkADQfQjdA8mDmufC3fFqfktnUQK5sRgPVPcish18Azc7ZXHT3AaJE7K6Kt
+  Status: Ok
+  Log Messages:
+    Program 2jxzZnQWeYb83Uqh7LGgz4g5VgJz1zgT5quUFnZNBAfr invoke [1]
+    Program log: Instruction: Initialize
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program 2jxzZnQWeYb83Uqh7LGgz4g5VgJz1zgT5quUFnZNBAfr consumed 5130 of 200000 compute units
+    Program 2jxzZnQWeYb83Uqh7LGgz4g5VgJz1zgT5quUFnZNBAfr success
