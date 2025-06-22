@@ -1,5 +1,6 @@
 use solana_program::{
-    account_info::AccountInfo, entrypoint, entrypoint::ProgramResult, msg, pubkey::Pubkey,
+    account_info::AccountInfo, entrypoint, entrypoint::ProgramResult, msg,
+    program_error::ProgramError, pubkey::Pubkey,
 };
 
 // Declare and export the program's entrypoint
@@ -11,7 +12,20 @@ pub fn process_instruction(
     _accounts: &[AccountInfo], // accounts to not interact with (this time)
     _instruction_data: &[u8], // Ignored, all helloworld instructions are hellos
 ) -> ProgramResult {
-    msg!("[lib] Hello World Rust program entrypoint");
+    println!("[lib] Hello World Rust program entrypoint {}", _program_id);
 
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn it_works() {
+        let result = process_instruction(&Pubkey::default(), &[], &[]);
+
+        println!("process_instruction result: {:?}", result);
+        assert!(result.is_ok());
+    }
 }
