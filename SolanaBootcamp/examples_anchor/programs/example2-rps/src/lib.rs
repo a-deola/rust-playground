@@ -24,8 +24,11 @@ mod example2 {
 
         // Get player index, but also act as a check
         let indx: usize = game.get_player_index(ctx.accounts.player.key()).unwrap();
-
+        let clock = Clock::get()?;
+        self.last_action = clock.unix_timestamp;
         game.place_hash(hashed_hand, indx)
+        let clock = Clock::get()?;
+        self.last_action = clock.unix_timestamp;
     }
 
     // Load hand to the the game account
@@ -34,6 +37,8 @@ mod example2 {
 
         // Get player index, but also act as a check
         let indx: usize = game.get_player_index(ctx.accounts.player.key()).unwrap();
+        let clock = Clock::get()?;
+        game.last_action = clock.unix_timestamp;
 
         game.place_hand(hand_string, indx)
     }
@@ -60,6 +65,8 @@ pub enum Hand {
     Rock,
     Paper,
     Scissors,
+    Lizard,
+    Spock,
 }
 
 impl Hand {
@@ -68,6 +75,8 @@ impl Hand {
             '0' => Ok(Hand::Rock),
             '1' => Ok(Hand::Paper),
             '2' => Ok(Hand::Scissors),
+            '3' => Ok(Hand::Lizard),
+            '4' => Ok(Hand::Spock),
             _ => Err(SErrors::WrongHandChar.into()),
         }
     }
@@ -80,7 +89,7 @@ impl Default for Hand {
 }
 
 pub trait Beats {
-    fn beats(&self) -> Self;
+    fn beats(&self) -> [Hand; 2];
 }
 
 impl Beats for Hand {
@@ -89,6 +98,10 @@ impl Beats for Hand {
             Rock => Scissors,
             Paper => Rock,
             Scissors => Paper,
+            Rock => Lizard,
+            Lizard => Spock,
+            Spock => Scissors,
+            Spock => Rock
         }
     }
 }
@@ -111,6 +124,7 @@ pub struct Game {
     hand: [Hand; 2],
     hand_submitted: [bool; 2],
     winner: String,
+    last_action: i64, // Timestamp of the last action
 }
 
 impl Game {
