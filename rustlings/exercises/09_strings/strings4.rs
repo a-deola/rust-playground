@@ -1,5 +1,15 @@
 // Calls of this function should be replaced with calls of `string_slice` or `string`.
-fn placeholder() {}
+fn placeholder<T: AsRef<str>>(arg: T) {
+    let s = arg.as_ref();
+    // Convert the argument into a String
+
+    // Determine if the original argument was a &str or String
+    if s.is_empty() || s.chars().next().unwrap() == ' ' {
+        string_slice(s);
+    } else {
+        string(s.to_string())
+    }
+}
 
 fn string_slice(arg: &str) {
     println!("{arg}");
