@@ -7,10 +7,4 @@ describe("favorites-sol", () => {
   anchor.setProvider(anchor.AnchorProvider.env());
 
   const program = anchor.workspace.favoritesSol as Program<FavoritesSol>;
-
-  it("Is initialized!", async () => {
-    // Add your test here.
-    const tx = await program.methods.initialize().rpc();
-    console.log("Your transaction signature", tx);
-  });
 });
